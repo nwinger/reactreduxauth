@@ -4,18 +4,39 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class Header extends Component {
+
+    renderLinks() {
+        if (this.props.authenticated) {
+            // Show a link to sign out
+            return (
+                <li className="nav-item">
+                    <Link className="nav-link" to="/signout">Sign Out</Link>
+                </li>
+            );
+        } else {
+            // Show a link to sign in or sign up
+            return [
+                <li className="nav-item" key={1}>
+                    <Link to="/signin">Sign in</Link>
+                </li>,
+                <li className="nav-item" key={2}>
+                    <Link to="/signup">Sign Up</Link>
+                </li>
+            ];
+        }
+    }
+
     render() {
         return (
             <nav className="navbar navbar-inverse">
+                <Link to="/" className="navbar-brand">Redux Auth</Link>
                 <ul className="nav navbar-nav">
-                    <li className="nav-item">
-                        <Link to="/">Sign in</Link>
-                    </li>
+                    {this.renderLinks()}
                     <li className="nav-item">
                         <Link to="/resources">Resources</Link>
                     </li>
                     <li className="navbar-btn">
-                        
+
                     </li>
                 </ul>
             </nav>
@@ -23,4 +44,10 @@ class Header extends Component {
     }
 }
 
-export default Header;
+function mapStateToProps(state) {
+    return {
+        authenticated: state.auth.authenticated
+    };
+}
+
+export default connect(mapStateToProps)(Header);
