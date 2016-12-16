@@ -28,15 +28,12 @@ class Header extends Component {
 
     render() {
         return (
-            <nav className="navbar navbar-inverse">
+            <nav className="navbar navbar-default">
                 <Link to="/" className="navbar-brand">Redux Auth</Link>
                 <ul className="nav navbar-nav">
                     {this.renderLinks()}
                     <li className="nav-item">
                         <Link to="/resources">Resources</Link>
-                    </li>
-                    <li className="navbar-btn">
-
                     </li>
                 </ul>
             </nav>
